@@ -2,7 +2,9 @@ package com.nibodha.socpro.helpers.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
@@ -24,6 +26,8 @@ public class JsonParserImpl implements JsonParser{
 					websites.add(objNode.get("url").textValue());
 				}
 			}
+//			Set<String> distinctSites = new HashSet<String>(websites);
+//			websites = new ArrayList<String>(distinctSites);
 			return websites;
 		} catch (IOException e) {			
 			e.printStackTrace();

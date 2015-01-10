@@ -9,17 +9,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nibodha.socpro.facade.SocProFacade;
 import com.nibodha.socpro.model.Blog;
+import com.nibodha.socpro.model.BlogCommentsSentiment;
+import com.nibodha.socpro.model.BlogDetails;
 
 @Controller
 @RequestMapping("/socpro")
-public class SocProController {
+public class SocProController {	
 	
 	@Autowired
 	private SocProFacade socProFacade;
 	
-	@RequestMapping("/details/{email}")
+	@RequestMapping("/blogs/{email}")
 	@ResponseBody
-	public String getFullContactDetails(@PathParam("email") String email) {				
+	public BlogDetails getBlogDetails(@PathParam("email") String email) {				
 		return socProFacade.createProfile(email);		
 	}
 	
@@ -27,6 +29,12 @@ public class SocProController {
 	@ResponseBody
 	public Blog getBlog() {				
 		return socProFacade.getBlog();		
+	}
+	
+	@RequestMapping("/blog/{email}/sentiment")
+	@ResponseBody
+	public BlogCommentsSentiment getSentiments(@PathParam("email") String email) {		
+		return socProFacade.getBlogCommentsSentimentAnalyzed();		
 	}
 	
 }

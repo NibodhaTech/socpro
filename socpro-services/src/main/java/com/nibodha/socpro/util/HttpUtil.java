@@ -97,6 +97,29 @@ public class HttpUtil {
 
 		return null;
 	}
+	
+	public Response doPost(String url, Map<String, String> headers, Map<String, String> params) {
+
+		BoundRequestBuilder builder = sender.preparePost(url);
+
+		for (String key : params.keySet()) {
+			builder.addParameter(key, params.get(key));
+		}
+		for (String key : headers.keySet()) {
+			builder.addHeader(key, headers.get(key));
+		}
+
+		Future<Response> f;
+		try {			
+			// builder.setBody(requestParams.values().iterator().next());
+			f = builder.execute();
+			return f.get();
+		} catch (Exception e) {
+			LOGGER.error("Communication Exception in HTTP Sender ", e);
+		}
+
+		return null;
+	}
 
 	public Response doGet(String url, Map<String, String> requestParams) {
 		BoundRequestBuilder builder = sender.prepareGet(url);
