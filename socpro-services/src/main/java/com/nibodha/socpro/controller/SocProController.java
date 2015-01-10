@@ -7,19 +7,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nibodha.socpro.facade.FullContactFacade;
+import com.nibodha.socpro.facade.SocProFacade;
+import com.nibodha.socpro.model.Blog;
 
 @Controller
-@RequestMapping("/fullcontact")
-public class FullContactController {
+@RequestMapping("/socpro")
+public class SocProController {
 	
 	@Autowired
-	private FullContactFacade fullContactFacade;
+	private SocProFacade socProFacade;
 	
 	@RequestMapping("/details/{email}")
 	@ResponseBody
 	public String getFullContactDetails(@PathParam("email") String email) {				
-		return fullContactFacade.createProfile(email);		
+		return socProFacade.createProfile(email);		
+	}
+	
+	@RequestMapping("/blog")
+	@ResponseBody
+	public Blog getBlog() {				
+		return socProFacade.getBlog();		
 	}
 	
 }
